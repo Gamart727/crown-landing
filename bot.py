@@ -133,4 +133,4 @@ def chat(m):
     except Exception as e:
         bot.reply_to(m, f"⚠️ Error al consultar la IA: {e}")
 
-bot.polling()
+bot.infinity_polling(timeout=30, long_polling_timeout=30)
