@@ -13,16 +13,18 @@
     .rule { border-top:1px solid rgba(197,172,131,.35); }
     .hero-title { font-size:clamp(2.6rem,5.4vw,5.9rem); line-height:1.04; letter-spacing:-.035em; }
     .display-title { font-size:clamp(2.6rem,4.5vw,5rem); line-height:1.06; letter-spacing:-.025em; }
-    .bottle-scene { min-height:510px; background:radial-gradient(ellipse at 50% 49%,#5c5146 0%,#302d2a 35%,#1b1a19 70%); overflow:hidden; }
-    .bottle-scene::before { content:''; position:absolute; inset:0; opacity:.25; background:repeating-linear-gradient(100deg,transparent 0 25px,rgba(255,255,255,.025) 26px 27px); }
-    .bottle { width:min(47%,210px); height:290px; border:1px solid rgba(244,223,184,.7); border-radius:12px 12px 27px 27px; background:linear-gradient(105deg,rgba(255,255,255,.11),rgba(197,172,131,.06) 30%,rgba(240,207,147,.32) 68%,rgba(255,255,255,.06)); box-shadow:inset 12px 0 19px rgba(255,255,255,.1),inset -13px 0 20px rgba(0,0,0,.3),0 30px 80px rgba(0,0,0,.65); }
-    .bottle-neck { width:86px; height:52px; border:1px solid rgba(244,223,184,.5); background:linear-gradient(90deg,#51483d,#9d886a,#554b40); }
-    .bottle-cap { width:102px; height:58px; background:linear-gradient(90deg,#191817,#655848 46%,#1e1c1a); border:1px solid #988368; box-shadow:0 9px 22px rgba(0,0,0,.45); }
-    .bottle-label { border-top:1px solid rgba(242,228,199,.42); border-bottom:1px solid rgba(242,228,199,.42); }
+    .bottle-scene { min-height:510px; background:linear-gradient(180deg,#262320 0%,#1d1b19 55%,#161513 100%); overflow:hidden; }
+    .bottle-scene::before { content:''; position:absolute; width:460px; height:460px; left:50%; top:50%; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle,rgba(197,172,131,.12) 0%,rgba(197,172,131,.04) 45%,transparent 70%); }
+    .bottle-scene::after { content:''; position:absolute; bottom:11%; left:50%; transform:translateX(-50%); width:170px; height:24px; border-radius:50%; background:radial-gradient(ellipse,rgba(0,0,0,.45) 0%,transparent 70%); }
+    .bottle { position:relative; width:min(44%,196px); height:300px; border:1px solid rgba(233,219,192,.26); border-radius:10px 10px 24px 24px; background:linear-gradient(155deg,rgba(255,255,255,.13) 0%,rgba(197,172,131,.07) 40%,rgba(240,207,147,.16) 75%,rgba(255,255,255,.03) 100%); box-shadow:inset 1px 1px 1px rgba(255,255,255,.18),inset -14px 0 26px rgba(0,0,0,.18),0 34px 70px rgba(0,0,0,.5); }
+    .bottle::after { content:''; position:absolute; top:14px; bottom:28px; left:16px; width:10px; border-radius:20px; background:linear-gradient(180deg,rgba(255,255,255,.3),rgba(255,255,255,.02)); opacity:.5; }
+    .bottle-neck { width:68px; height:32px; margin-top:-1px; border:1px solid rgba(233,219,192,.22); border-radius:2px; background:linear-gradient(90deg,#38322a,#8d7a5c 50%,#38322a); }
+    .bottle-cap { width:84px; height:46px; border:1px solid #7f6c52; border-radius:5px 5px 1px 1px; background:linear-gradient(90deg,#1b1a18,#6c5d49 50%,#1b1a18); box-shadow:0 10px 20px rgba(0,0,0,.35); }
+    .bottle-label { border-top:1px solid rgba(233,219,192,.3); border-bottom:1px solid rgba(233,219,192,.3); }
     .gold-link { transition:color .2s,transform .2s,background .2s; }
     .gold-link:hover { transform:translateY(-2px); }
     a:focus-visible { outline:2px solid #e8cf9e; outline-offset:5px; }
-    @media (max-width:767px) { .bottle-scene { min-height:390px; } .bottle { height:235px; } .bottle-neck { height:41px; } .bottle-cap { height:48px; } }
+    @media (max-width:767px) { .bottle-scene { min-height:390px; } .bottle { width:min(58%,168px); height:230px; } .bottle-neck { width:54px; height:26px; } .bottle-cap { width:68px; height:36px; } }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } .gold-link { transition:none; } }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.577.0/dist/umd/lucide.min.js" type="text/javascript"></script>
@@ -59,7 +61,7 @@
      <div class="absolute left-6 bottom-6 text-[10px] tracking-[.25em] text-[#c5ac83]">
       01 / THE RITUAL
      </div>
-     <div class="relative flex flex-col items-center">
+     <div class="relative z-10 flex flex-col items-center">
       <div class="bottle-cap"></div>
       <div class="bottle-neck"></div>
       <div class="bottle flex items-center justify-center"><span class="bottle-label serif text-[#e9dbc0] text-3xl tracking-[.17em] px-4 py-6">CROWN</span>
