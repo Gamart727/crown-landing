@@ -1,6 +1,8 @@
 import os
+import io
 import base64
 import requests
+import pypdf
 from telebot import TeleBot
 
 TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
@@ -21,7 +23,31 @@ def start(m):
 @bot.message_handler(content_types=["text", "document", "photo"])
 def chat(m):
     if m.document is not None and m.text is None:
-        bot.reply_to(m, "📄 Recibí el catálogo. Déjame revisarlo y te ayudo con tu consulta.")
+        try:
+            file_info = bot.get_file(m.document.file_id)
+            doc_bytes = bot.download_file(file_info.file_path)
+            reader = pypdf.PdfReader(io.BytesIO(doc_bytes))
+            catalog_text = "\n".join((page.extract_text() or "") for page in reader.pages)
+            user_content = (
+                "El cliente me envió el catálogo de Crown Perfumes. "
+                "Con este catálogo, responde como el asistente oficial de Crown Perfumes. Catálogo:\n\n"
+                + catalog_text
+            )
+            r = requests.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {GROQ_KEY}"},
+                json={
+                    "model": "qwen/qwen3.8-27b",
+                    "messages": [
+                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "user", "content": user_content},
+                    ],
+                },
+            )
+            ans = r.json()["choices"][0]["message"]["content"]
+            bot.reply_to(m, ans)
+        except Exception as e:
+            bot.reply_to(m, f"😕 No pude procesar el catálogo: {e}")
         return
 
     if m.photo is not None:
